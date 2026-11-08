@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pcaplab"
+version = "1.0.0"
+description = "Read pcap and pcapng files, follow flows and find scans, DNS tunnels, beacons, ARP spoofing and clear-text passwords."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = []  # standard library only
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "pytest-cov>=5",
+  "pytest-xdist>=3.5",
+  "ruff>=0.4",
+  "mypy>=1.10",
+  "playwright>=1.45",  # only to render the README screenshot
+  "scapy>=2.5",  # only to cross-check the decoder in tools/evaluate.py (an independent implementation)
+]
+
+[project.scripts]
+pcaplab = "pcaplab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+source = ["pcaplab"]
+branch = true
+omit = ["*/__main__.py"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+skip_covered = true
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src"]
+strict = true
+warn_unused_ignores = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/*" = ["E501"]
+"tests/*" = ["E501"]
+"tools/*" = ["E501"]

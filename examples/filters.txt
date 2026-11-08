@@ -1,0 +1,10 @@
+# pcaplab filter expressions (the same language for -f and for the filter command)
+tcp and port 443                          # HTTPS traffic
+host 10.0.0.5 and not dns                 # everything of one host except name lookups
+src net 192.168.0.0/16 and (syn or rst)   # connection attempts and resets from the LAN
+dns and name example.com                  # lookups, TLS server names and HTTP hosts for a domain and its subdomains
+portrange 8000-8100                       # a range of ports, either side
+vlan 20                                   # one VLAN
+arp                                       # who asks for whom
+error                                     # packets that could not be decoded
+syn and not synack                        # what was asked for and maybe not answered (use with flows --state unanswered)

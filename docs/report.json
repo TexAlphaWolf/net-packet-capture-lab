@@ -1,0 +1,611 @@
+{
+  "environment": {
+    "system": "Linux x86_64",
+    "python": "3.13.16",
+    "seed": 1000,
+    "quick": false,
+    "seconds": 145.2
+  },
+  "crosscheck": {
+    "scapy": "2.6.1",
+    "packets": 20000,
+    "by_kind": {
+      "arp": 1492,
+      "dns_q": 1561,
+      "dns_r": 1571,
+      "http": 1553,
+      "icmp4": 1488,
+      "icmp6": 1499,
+      "sll": 1574,
+      "sll2": 1534,
+      "tcp4": 1627,
+      "tcp6": 1525,
+      "udp4": 1506,
+      "udp6": 1470,
+      "vlan": 1600
+    },
+    "fields_compared": 157549,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  "pipeline": {
+    "captures": 40,
+    "seconds_each": 1800.0,
+    "packets": 1714358,
+    "truth": {
+      "arp-conflict": 40,
+      "beacon": 80,
+      "cleartext-credentials": 80,
+      "dns-tunnel": 40,
+      "nxdomain-storm": 40,
+      "port-scan": 120,
+      "tcp-retransmissions": 40
+    },
+    "found": {
+      "arp-conflict": 40,
+      "beacon": 80,
+      "cleartext-credentials": 80,
+      "dns-tunnel": 40,
+      "nxdomain-storm": 40,
+      "port-scan": 120,
+      "tcp-retransmissions": 40
+    },
+    "found_total": 440,
+    "truth_total": 440,
+    "missed": [],
+    "false_findings": 0,
+    "false_list": [],
+    "duplicates": 0,
+    "slow_scan": {
+      "injected": 40,
+      "found": 0
+    },
+    "quiet": {
+      "captures": 15,
+      "packets": 605704,
+      "false_findings": 0,
+      "naive_alerts": {
+        "beacon": 195,
+        "dns-tunnel": 15,
+        "nxdomain-storm": 15,
+        "port-scan": 180
+      }
+    },
+    "baseline": {
+      "alerts": {
+        "beacon": 600,
+        "dns-tunnel": 80,
+        "nxdomain-storm": 80,
+        "port-scan": 635
+      },
+      "true": {
+        "beacon": 80,
+        "dns-tunnel": 40,
+        "nxdomain-storm": 40,
+        "port-scan": 120
+      },
+      "false": {
+        "beacon": 520,
+        "dns-tunnel": 40,
+        "nxdomain-storm": 40,
+        "port-scan": 515
+      }
+    }
+  },
+  "boundaries": {
+    "scan_rate": [
+      {
+        "probes_per_second": 0.1,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "probes_per_second": 0.2,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "probes_per_second": 0.3,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "probes_per_second": 0.5,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "probes_per_second": 1,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "probes_per_second": 5,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "probes_per_second": 50,
+        "found": 8,
+        "of": 8
+      }
+    ],
+    "scan_size": [
+      {
+        "ports": 5,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "ports": 10,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "ports": 14,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "ports": 15,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "ports": 16,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "ports": 30,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "ports": 100,
+        "found": 8,
+        "of": 8
+      }
+    ],
+    "beacon_jitter": [
+      {
+        "jitter": 0.0,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "jitter": 0.05,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "jitter": 0.1,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "jitter": 0.2,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "jitter": 0.3,
+        "found": 6,
+        "of": 8
+      },
+      {
+        "jitter": 0.5,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "jitter": 0.8,
+        "found": 0,
+        "of": 8
+      }
+    ],
+    "beacon_count": [
+      {
+        "connections": 5,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "connections": 7,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "connections": 8,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "connections": 12,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "connections": 30,
+        "found": 8,
+        "of": 8
+      }
+    ],
+    "tunnel_size": [
+      {
+        "names": 10,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "names": 20,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "names": 24,
+        "found": 0,
+        "of": 8
+      },
+      {
+        "names": 25,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "names": 40,
+        "found": 8,
+        "of": 8
+      },
+      {
+        "names": 100,
+        "found": 8,
+        "of": 8
+      }
+    ],
+    "sweep_scan_targets": [
+      {
+        "scan_targets": 5,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 60
+      },
+      {
+        "scan_targets": 10,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 60
+      },
+      {
+        "scan_targets": 15,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      },
+      {
+        "scan_targets": 25,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      },
+      {
+        "scan_targets": 40,
+        "found": 106,
+        "missed": 4,
+        "false_findings": 0
+      }
+    ],
+    "sweep_beacon_spread": [
+      {
+        "beacon_spread": 0.02,
+        "found": 93,
+        "missed": 17,
+        "false_findings": 0
+      },
+      {
+        "beacon_spread": 0.05,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      },
+      {
+        "beacon_spread": 0.15,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      },
+      {
+        "beacon_spread": 0.4,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      },
+      {
+        "beacon_spread": 0.8,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      }
+    ],
+    "sweep_beacon_min": [
+      {
+        "beacon_min": 3,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 155
+      },
+      {
+        "beacon_min": 5,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 113
+      },
+      {
+        "beacon_min": 8,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      },
+      {
+        "beacon_min": 12,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      },
+      {
+        "beacon_min": 20,
+        "found": 109,
+        "missed": 1,
+        "false_findings": 0
+      }
+    ],
+    "sweep_nx_names": [
+      {
+        "nx_names": 3,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 10
+      },
+      {
+        "nx_names": 5,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 10
+      },
+      {
+        "nx_names": 10,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      },
+      {
+        "nx_names": 20,
+        "found": 110,
+        "missed": 0,
+        "false_findings": 0
+      },
+      {
+        "nx_names": 40,
+        "found": 108,
+        "missed": 2,
+        "false_findings": 0
+      }
+    ]
+  },
+  "cost": {
+    "pcap": {
+      "packets": 499728,
+      "file_mib": 266.2,
+      "read": {
+        "packets_per_second": 1036010,
+        "seconds": 0.48,
+        "max_rss_mib": 14.8,
+        "flows": 0
+      },
+      "decode": {
+        "packets_per_second": 218780,
+        "seconds": 2.28,
+        "max_rss_mib": 14.9,
+        "flows": 0
+      },
+      "analyze": {
+        "packets_per_second": 125125,
+        "seconds": 3.99,
+        "max_rss_mib": 52.5,
+        "flows": 28389
+      },
+      "all": {
+        "packets_per_second": 125917,
+        "seconds": 3.97,
+        "max_rss_mib": 52.9,
+        "flows": 28389
+      }
+    },
+    "pcapng": {
+      "packets": 499728,
+      "file_mib": 274.3,
+      "read": {
+        "packets_per_second": 525846,
+        "seconds": 0.95,
+        "max_rss_mib": 14.7,
+        "flows": 0
+      },
+      "decode": {
+        "packets_per_second": 173725,
+        "seconds": 2.88,
+        "max_rss_mib": 14.8,
+        "flows": 0
+      },
+      "analyze": {
+        "packets_per_second": 104405,
+        "seconds": 4.79,
+        "max_rss_mib": 52.5,
+        "flows": 28389
+      },
+      "all": {
+        "packets_per_second": 100795,
+        "seconds": 4.96,
+        "max_rss_mib": 53.0,
+        "flows": 28389
+      }
+    }
+  },
+  "real": {
+    "files": 11,
+    "packets": 694,
+    "scapy_packets": 694,
+    "fields_equal": 2796,
+    "fields_different": 0,
+    "undecoded": 1,
+    "rows": [
+      {
+        "file": "arp.pcap",
+        "packets": 1,
+        "scapy_packets": 1,
+        "undecoded": 1,
+        "warnings": [],
+        "fields_equal": 0,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 1,
+        "flows": 0,
+        "findings": [],
+        "tls_names": []
+      },
+      {
+        "file": "dhcp-nanosecond.pcap",
+        "packets": 4,
+        "scapy_packets": 4,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 20,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 2,
+        "findings": [],
+        "tls_names": []
+      },
+      {
+        "file": "dhcp.pcap",
+        "packets": 4,
+        "scapy_packets": 4,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 20,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 2,
+        "findings": [],
+        "tls_names": []
+      },
+      {
+        "file": "dhcp.pcapng",
+        "packets": 4,
+        "scapy_packets": 4,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 20,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 2,
+        "findings": [],
+        "tls_names": []
+      },
+      {
+        "file": "dns-mdns.pcap",
+        "packets": 587,
+        "scapy_packets": 587,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 2091,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 163,
+        "findings": [],
+        "tls_names": [
+          "*.immedia-semi.com"
+        ]
+      },
+      {
+        "file": "dns_port.pcap",
+        "packets": 4,
+        "scapy_packets": 4,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 20,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 2,
+        "findings": [],
+        "tls_names": []
+      },
+      {
+        "file": "http.pcap",
+        "packets": 1,
+        "scapy_packets": 1,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 7,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 1,
+        "findings": [],
+        "tls_names": []
+      },
+      {
+        "file": "ipv6.pcap",
+        "packets": 1,
+        "scapy_packets": 1,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 2,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 1,
+        "findings": [],
+        "tls_names": []
+      },
+      {
+        "file": "rsasnakeoil2.pcap",
+        "packets": 58,
+        "scapy_packets": 58,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 406,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 2,
+        "findings": [],
+        "tls_names": []
+      },
+      {
+        "file": "tls12-dsb.pcapng",
+        "packets": 17,
+        "scapy_packets": 17,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 119,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 2,
+        "findings": [],
+        "tls_names": [
+          "example.com",
+          "example.net"
+        ]
+      },
+      {
+        "file": "tls13-rfc8446.pcap",
+        "packets": 13,
+        "scapy_packets": 13,
+        "undecoded": 0,
+        "warnings": [],
+        "fields_equal": 91,
+        "fields_different": 0,
+        "packets_not_decoded_by_pcaplab": 0,
+        "flows": 2,
+        "findings": [],
+        "tls_names": []
+      }
+    ]
+  }
+}

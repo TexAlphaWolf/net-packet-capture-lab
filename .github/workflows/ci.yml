@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy
+      - run: pytest -n auto --cov
+
+  windows:
+    name: test (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - run: pip install -e ".[dev]"
+      - run: pytest -n auto
+
+  macos:
+    name: test (macOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - run: pip install -e ".[dev]"
+      - run: pytest -n auto
+
+  evaluation:
+    name: measured quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - run: pip install -e ".[dev]"
+      - name: Captures taken by other people (downloaded from the Wireshark test suite, not stored in this repository)
+        run: |
+          mkdir real
+          for f in arp.pcap dhcp.pcap dhcp.pcapng dhcp-nanosecond.pcap dns-mdns.pcap dns_port.pcap http.pcap ipv6.pcap rsasnakeoil2.pcap tls12-dsb.pcapng tls13-rfc8446.pcap; do
+            curl -fsSL "https://raw.githubusercontent.com/wireshark/wireshark/master/test/captures/$f" -o "real/$f" || echo "could not fetch $f"
+          done
+          ls real
+      - name: Decoder against scapy, findings against injected truth, thresholds, cost, real captures
+        run: python tools/evaluate.py --quick --check --real real --out report.json
+
+  docker:
+    name: docker image
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker build -t pcaplab .
+      - name: sample capture, findings, report, filter (read-only, no capabilities, no network)
+        run: bash tools/docker_e2e.sh pcaplab
+
+  docker-windows:
+    # the same flow driven from PowerShell, to keep that script honest (Linux container on the runner)
+    name: docker flow from PowerShell
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker build -t pcaplab .
+      - name: PowerShell script
+        shell: pwsh
+        run: ./tools/docker_e2e.ps1 -Image pcaplab
